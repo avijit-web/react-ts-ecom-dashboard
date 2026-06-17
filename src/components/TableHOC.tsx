@@ -3,6 +3,7 @@ import {
   getCoreRowModel,
   useReactTable,
   getSortedRowModel,
+  getPaginationRowModel,
   type ColumnDef,
   type TableOptions,
   type SortingState,
@@ -14,6 +15,7 @@ function TableHOC<T extends object>(
   data: T[],
   containerClassname: string,
   heading: string,
+  showPagination: boolean = false,
 ) {
   return function HOC() {
     const [sorting, setSorting] = useState<SortingState>([]);
@@ -24,9 +26,15 @@ function TableHOC<T extends object>(
       state: {
         sorting,
       },
+      initialState: {
+        pagination: {
+          pageSize: 6,
+        },
+      },
       onSortingChange: setSorting,
       getCoreRowModel: getCoreRowModel(),
       getSortedRowModel: getSortedRowModel(),
+      getPaginationRowModel: getPaginationRowModel(),
     };
 
     const table = useReactTable(options);
@@ -75,6 +83,38 @@ function TableHOC<T extends object>(
             ))}
           </tbody>
         </table>
+
+        {showPagination && (
+          <div className="table-pagination">
+            <button
+              disabled={!table.getCanPreviousPage()}
+              onClick={() => table.previousPage()}
+            >
+              Prev
+            </button>
+            <span>
+              {table.getState().pagination.pageIndex + 1} of{" "}
+              {table.getPageCount()}
+            </span>
+            <button
+              disabled={!table.getCanNextPage()}
+              onClick={() => table.nextPage()}
+            >
+              Next
+            </button>
+
+            <select
+              value={table.getState().pagination.pageSize}
+              onChange={(e) => table.setPageSize(Number(e.target.value))}
+            >
+              {[6, 10, 20, 50].map((size) => (
+                <option key={size} value={size}>
+                  {size} / page
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
       </div>
     );
   };

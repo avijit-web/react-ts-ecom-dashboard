@@ -2,7 +2,7 @@ import { useState, type ReactElement } from "react";
 import TableHOC from "../components/TableHOC";
 import type { ColumnDef } from "@tanstack/react-table";
 import { Link } from "react-router";
-import { FaPlay, FaPlus } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 
 interface DataType {
   photo: ReactElement;
@@ -118,6 +118,7 @@ function Products() {
     data,
     "dashboard-product-box",
     "Products",
+    true,
   );
 
   return (
