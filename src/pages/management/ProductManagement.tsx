@@ -1,9 +1,9 @@
-import React, { useState, type ChangeEvent } from "react";
+import { useState, type ChangeEvent } from "react";
 
 function ProductManagement() {
-  const [name, setName] = useState<string>("");
-  const [price, setPrice] = useState<number>();
-  const [stock, setStock] = useState<number>(0);
+  const [name, setName] = useState<string>("Shoes");
+  const [price, setPrice] = useState<number>(2000);
+  const [stock, setStock] = useState<number>(1);
   const [photo, setPhoto] = useState<string>("");
 
   const changeImageHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -18,6 +18,16 @@ function ProductManagement() {
       };
     }
   };
+  const submitHandler = (e: React.SyntheticEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    console.log({
+      name,
+      price,
+      stock,
+      photo,
+    });
+  };
 
   return (
     <div>
@@ -28,17 +38,16 @@ function ProductManagement() {
 
           <p>{name}</p>
 
-          {/* {
-            stock > 0 ? (
-              <span>
-                Available
-              </span>
-            )
+          {stock > 0 ? (
+            <span className="green"> {stock} Available</span>
+          ) : (
+            <span className="red">Not Available</span>
+          )}
 
-          } */}
+          <h3>${price}</h3>
         </section>
         <article>
-          <form>
+          <form onSubmit={submitHandler}>
             <h2>New Product</h2>
             <div>
               <label>Name</label>
