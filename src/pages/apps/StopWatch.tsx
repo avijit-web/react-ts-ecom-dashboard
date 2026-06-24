@@ -1,3 +1,11 @@
+const formatTime = (timeInSeconds: number) => {
+  const hours = String(Math.floor(timeInSeconds / 3600));
+  const minutes = String(Math.floor((timeInSeconds % 3600) / 60));
+  const seconds = String(timeInSeconds % 60);
+
+  return `${hours.padStart(2, "0")}:${minutes.padStart(2, "0")}:${seconds.padStart(2, "0")}`;
+};
+
 function StopWatch() {
   return (
     <main className="dashboard-app-container">
