@@ -39,6 +39,7 @@ function BarCharts() {
         <BarChart
           horizontal
           data_1={[300, 144, 433, 655, 237, 755, 190, 506, 435, 641, 510, 302]}
+          data_2={[]}
           title_1="Products"
           title_2=""
           bgColor_1="hsl(260,50%,30%)"
