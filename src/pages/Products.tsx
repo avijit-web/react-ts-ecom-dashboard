@@ -2,7 +2,8 @@ import { useState, type ReactElement } from "react";
 import TableHOC from "../components/TableHOC";
 import type { ColumnDef } from "@tanstack/react-table";
 import { Link } from "react-router";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaRegBell } from "react-icons/fa";
+import { BsSearch } from "react-icons/bs";
 
 interface DataType {
   photo: ReactElement;
@@ -122,7 +123,13 @@ function Products() {
   );
 
   return (
-    <div>
+    <div className="dashboard">
+      <div className="bar">
+        <BsSearch />
+        <input type="text" placeholder="Search for data , users , docs," />
+        <FaRegBell />
+        <img src={"https://i.pravatar.cc/300"} alt="User" />
+      </div>
       <main>{Table()}</main>
       <Link to={"/admin/product/new"} className="create-product-btn">
         <FaPlus />

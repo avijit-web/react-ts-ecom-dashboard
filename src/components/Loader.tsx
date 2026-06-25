@@ -1,7 +1,11 @@
 import React from "react";
 
 function Loader() {
-  return <div>loading...</div>;
+  return (
+    <section className="loader">
+      <div></div>
+    </section>
+  );
 }
 
 export default Loader;
